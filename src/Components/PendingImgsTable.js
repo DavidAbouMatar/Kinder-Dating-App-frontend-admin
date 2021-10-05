@@ -2,7 +2,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 
@@ -39,7 +38,7 @@ function PendingImgsTable({ rows, removeImg }) {
       style={{ minHeight: "100vh" }}
     >
       {rows.map((row) => (
-        <Card sx={{ minWidth: 300, maxWidth: 500, m: 3 }}>
+        <Card key={row.id} sx={{ minWidth: 300, maxWidth: 500, m: 3 }}>
           <CardMedia
             component="img"
             height="350"
@@ -49,7 +48,7 @@ function PendingImgsTable({ rows, removeImg }) {
           <CardActions>
             <Button
               variant="contained"
-              color="error"
+              style={{ backgroundColor: "#F06795", color: "#FFFFFF" }}
               onClick={() => {
                 approveHandler(row.id);
               }}
