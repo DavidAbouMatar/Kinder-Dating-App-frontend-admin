@@ -87,7 +87,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function NavBar({ pageTitle }) {
+export default function NavBar({ pageTitle, children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -169,6 +169,11 @@ export default function NavBar({ pageTitle }) {
           </ListItem>
         </List>
       </Drawer>
+
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        {children}
+      </Box>
     </Box>
   );
 }
