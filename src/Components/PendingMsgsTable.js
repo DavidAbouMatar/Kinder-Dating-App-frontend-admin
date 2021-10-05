@@ -10,17 +10,23 @@ import axios from "axios";
 function PendingMsgsTable({ rows, removeMsg }) {
   async function approveHandler(msg_id) {
     removeMsg(msg_id);
-    let response = await axios.post("http://127.0.0.1:8000/api/approve_msg", {
-      approved_msg_id: msg_id,
-    });
+    let response = await axios.post(
+      "http://127.0.0.1:8000/api/admin/approve_msg",
+      {
+        approved_msg_id: msg_id,
+      }
+    );
     console.log(response.data.message);
   }
 
   async function rejectHandler(msg_id) {
     removeMsg(msg_id);
-    let response = await axios.post("http://127.0.0.1:8000/api/reject_msg", {
-      rejected_msg_id: msg_id,
-    });
+    let response = await axios.post(
+      "http://127.0.0.1:8000/api/admin/reject_msg",
+      {
+        rejected_msg_id: msg_id,
+      }
+    );
     console.log(response.data.message);
   }
 

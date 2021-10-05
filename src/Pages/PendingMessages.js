@@ -13,7 +13,7 @@ function PendingMessages(props) {
   }
 
   async function fetchData() {
-    let response = await axios.get("http://127.0.0.1:8000/api/admin_get_msgs");
+    let response = await axios.get("http://127.0.0.1:8000/api/admin/get_msgs");
     let data = response.data;
     setRows(data);
     setIsPending(false);
