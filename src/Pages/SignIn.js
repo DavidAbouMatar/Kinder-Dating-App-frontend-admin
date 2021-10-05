@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 
 const theme = createTheme();
@@ -14,9 +15,9 @@ const theme = createTheme();
 export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    let email = data.get("email");
-    let password = data.get("password");
+    const login_data = new FormData(event.currentTarget);
+    const email = login_data.get("email");
+    const password = login_data.get("password");
     try {
       let response = await axios.post("http://127.0.0.1:8000/api/login", {
         email,
@@ -47,7 +48,9 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
           <Typography component="h1" variant="h5">
             Admin Log In
           </Typography>
