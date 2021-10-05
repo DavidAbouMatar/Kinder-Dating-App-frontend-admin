@@ -19,6 +19,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import ImageIcon from "@mui/icons-material/Image";
 import MessageIcon from "@mui/icons-material/Message";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Badge from "@mui/material/Badge";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -87,7 +89,12 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function NavBar({ pageTitle, children }) {
+export default function NavBar({
+  pageTitle,
+  children,
+  pending_imgs_count,
+  pending_msgs_count,
+}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -138,26 +145,40 @@ export default function NavBar({ pageTitle, children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <ImageIcon />
-            </ListItemIcon>
-            <ListItemText primary="Pending Images" />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <MessageIcon />
-            </ListItemIcon>
-            <ListItemText primary="Pending Messages" />
-          </ListItem>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+          </Link>
+          <Link
+            to="/pendingimgs"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <Badge badgeContent={pending_imgs_count} color="error">
+                  <ImageIcon />
+                </Badge>
+              </ListItemIcon>
+              <ListItemText primary="Pending Images" />
+            </ListItem>
+          </Link>
+          <Link
+            to="/pendingmsgs"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <Badge badgeContent={pending_msgs_count} color="error">
+                  <MessageIcon />
+                </Badge>
+              </ListItemIcon>
+              <ListItemText primary="Pending Messages" />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <List>

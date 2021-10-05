@@ -6,6 +6,18 @@ import axios from "axios";
 function PendingImages(props) {
   const [isPending, setIsPending] = useState(true);
   const [rows, setRows] = useState(null);
+  const [pending_imgs_count, setPending_imgs_count] = useState(0);
+  const [pending_msgs_count, setPending_msgs_count] = useState(0);
+
+  async function fetchPendingCount() {
+    let response = await axios.get(
+      "http://localhost:8000/api/admin/pending_count"
+    );
+    let pending_count_data = response.data;
+    setPending_imgs_count(pending_count_data["imgs_count"]);
+    setPending_msgs_count(pending_count_data["msgs_count"]);
+    setIsPending(false);
+  }
 
   function clickHandler(img_id) {
     let newRows = rows.filter((row) => row.id != img_id);
@@ -21,11 +33,16 @@ function PendingImages(props) {
 
   useEffect(() => {
     fetchData();
+    fetchPendingCount();
   }, []);
 
   return (
     <div>
-      <NavBar pageTitle="Pending Images">
+      <NavBar
+        pageTitle="Pending Images"
+        pending_imgs_count={pending_imgs_count}
+        pending_msgs_count={pending_msgs_count}
+      >
         {isPending && <div>Loading...</div>}
         {!isPending && (
           <PendingImgsTable rows={rows} removeImg={clickHandler} />
