@@ -11,6 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useHistory } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
+import Alert from "@mui/material/Alert";
 import axios from "axios";
 
 const theme = createTheme();
@@ -18,6 +19,7 @@ const theme = createTheme();
 export default function SignIn() {
   const history = useHistory();
   const [isPending, setIsPending] = useState(false);
+  const [loginError, setLoginError] = useState(false);
 
   const handleSubmit = async (event) => {
     setIsPending(true);
@@ -36,17 +38,20 @@ export default function SignIn() {
           "login",
           JSON.stringify({ login: true, token: response.data.token })
         );
+        setLoginError(false);
         history.push("/home");
       } else {
         console.log("Something went wrong!");
         setIsPending(false);
+        setLoginError(true);
       }
     } catch (err) {
       if (err.response.status === 401) {
-        return console.log("Wrong Credentials!");
+        console.log("Wrong Credentials!");
         setIsPending(false);
+        setLoginError(true);
       }
-      return console.log(err);
+      console.log(err);
     }
   };
 
@@ -91,6 +96,10 @@ export default function SignIn() {
                 noValidate
                 sx={{ mt: 1 }}
               >
+                {loginError && (
+                  <Alert severity="error">Please Try Again!</Alert>
+                )}
+
                 <TextField
                   margin="normal"
                   required
