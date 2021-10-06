@@ -146,7 +146,7 @@ export default function NavBar({
         </DrawerHeader>
         <Divider />
         <List>
-          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+          <Link to="/home" style={{ textDecoration: "none", color: "black" }}>
             <ListItem button>
               <ListItemIcon>
                 <HomeIcon />
