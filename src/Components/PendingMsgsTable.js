@@ -5,16 +5,29 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 function PendingMsgsTable({ rows, removeMsg }) {
+  const history = useHistory();
+  let config = {};
+
+  let login_status = JSON.parse(localStorage.getItem("login"));
+  if (login_status.login) {
+    const token = login_status.token;
+    config = { headers: { Authorization: `Bearer ${token}` } };
+  } else {
+    history.push("/");
+  }
+
   async function approveHandler(msg_id) {
     removeMsg(msg_id);
     let response = await axios.post(
       "http://127.0.0.1:8000/api/admin/approve_msg",
       {
         approved_msg_id: msg_id,
-      }
+      },
+      config
     );
     console.log(response.data.message);
   }
@@ -25,7 +38,8 @@ function PendingMsgsTable({ rows, removeMsg }) {
       "http://127.0.0.1:8000/api/admin/reject_msg",
       {
         rejected_msg_id: msg_id,
-      }
+      },
+      config
     );
     console.log(response.data.message);
   }
