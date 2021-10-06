@@ -47,7 +47,7 @@ function PendingImages(props) {
   return (
     <div>
       <NavBar
-        pageTitle="Admin Pannel"
+        pageTitle="Kinder | Admin Pannel"
         pending_imgs_count={pending_imgs_count}
         pending_msgs_count={pending_msgs_count}
       >
