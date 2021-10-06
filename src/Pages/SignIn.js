@@ -8,11 +8,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const history = useHistory();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const login_data = new FormData(event.currentTarget);
@@ -24,7 +27,12 @@ export default function SignIn() {
         password,
       });
       if (response.status === 200) {
-        console.log("You are logged in!");
+        console.log("Successfully logged in!");
+        localStorage.setItem(
+          "login",
+          JSON.stringify({ login: true, token: response.data.token })
+        );
+        history.push("/home");
       } else {
         console.log("Something went wrong!");
       }
@@ -48,7 +56,7 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#F06795" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -68,7 +76,7 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              color="error"
             />
             <TextField
               margin="normal"
@@ -79,11 +87,13 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              color="error"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              style={{ backgroundColor: "#F06795" }}
               sx={{ mt: 3, mb: 2 }}
             >
               Log In
