@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NavBar from "../Components/NavBar";
 import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
 
 function PendingImages(props) {
@@ -30,6 +31,19 @@ function PendingImages(props) {
         pending_msgs_count={pending_msgs_count}
       >
         {isPending && <CircularProgress style={{ color: "#F06795" }} />}
+        {!isPending && (
+          <div>
+            <Typography variant="h2">Welcome to Admin Pannel</Typography>
+            <div>
+              {" "}
+              <Typography variant="h5">
+                {" "}
+                There are {pending_imgs_count} images & {pending_msgs_count}{" "}
+                messages waiting to be reviewed!
+              </Typography>
+            </div>{" "}
+          </div>
+        )}
       </NavBar>
       )
     </div>
