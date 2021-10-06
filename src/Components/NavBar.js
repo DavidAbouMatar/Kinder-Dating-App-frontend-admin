@@ -107,6 +107,10 @@ export default function NavBar({
     setOpen(false);
   };
 
+  const logoutHandler = () => {
+    localStorage.setItem("login", JSON.stringify({ login: false }));
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -183,12 +187,18 @@ export default function NavBar({
         </List>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary="Logout" />
-          </ListItem>
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "black" }}
+            onClick={logoutHandler}
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
 
