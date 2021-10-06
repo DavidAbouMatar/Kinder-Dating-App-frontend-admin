@@ -3,6 +3,11 @@ import NavBar from "../Components/NavBar";
 import PendingMsgsTable from "../Components/PendingMsgsTable";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import axios from "axios";
 
 function PendingMessages(props) {
@@ -23,6 +28,7 @@ function PendingMessages(props) {
   const [rows, setRows] = useState(null);
   const [pending_imgs_count, setPending_imgs_count] = useState(0);
   const [pending_msgs_count, setPending_msgs_count] = useState(0);
+  const [isAutoReview, setIsAutoReview] = useState(false);
 
   async function fetchPendingCount() {
     try {
@@ -39,9 +45,30 @@ function PendingMessages(props) {
     }
   }
 
+  async function autoMsgReview() {
+    try {
+      let response = await axios.get(
+        "http://127.0.0.1:8000/api/admin/auto_review_msgs",
+        config
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function clickHandler(msg_id) {
     let newRows = rows.filter((row) => row.id != msg_id);
     setRows(newRows);
+  }
+
+  function switchHandler() {
+    if (isAutoReview) {
+      setIsAutoReview(false);
+    } else {
+      setIsAutoReview(true);
+      setRows([]);
+      autoMsgReview();
+    }
   }
 
   async function fetchData() {
@@ -74,6 +101,38 @@ function PendingMessages(props) {
       >
         {isPending && <CircularProgress style={{ color: "#F06795" }} />}
         {!isPending && (
+          <Grid
+            component="main"
+            container
+            spacing={0}
+            direction="column"
+            alignItems="end"
+            justifyContent="center"
+          >
+            <FormGroup>
+              <FormControlLabel
+                control={<Switch color="error" onClick={switchHandler} />}
+                label="Auto Msg Reviewer"
+              />
+            </FormGroup>
+          </Grid>
+        )}
+        {!isPending && isAutoReview && (
+          <Grid
+            component="main"
+            sx={{ flexGrow: 1, p: 3 }}
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            style={{ minHeight: "100vh" }}
+          >
+            <Typography variant="h3">Auto Message Reviewer is On...</Typography>
+          </Grid>
+        )}
+
+        {!isPending && !isAutoReview && (
           <PendingMsgsTable rows={rows} removeMsg={clickHandler} />
         )}
       </NavBar>
