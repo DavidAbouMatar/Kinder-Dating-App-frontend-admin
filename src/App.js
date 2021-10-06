@@ -9,6 +9,9 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
+          <SignIn />
+        </Route>
+        <Route exact path="/home">
           <Home />
         </Route>
         <Route exact path="/pendingimgs">
