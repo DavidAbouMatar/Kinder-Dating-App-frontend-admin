@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import LinearProgress from "@mui/material/LinearProgress";
 import axios from "axios";
 
 function PendingMessages(props) {
@@ -121,7 +122,7 @@ function PendingMessages(props) {
           <Grid
             component="main"
             sx={{ flexGrow: 1, p: 3 }}
-            container
+            // container
             spacing={0}
             direction="column"
             alignItems="center"
@@ -129,6 +130,8 @@ function PendingMessages(props) {
             style={{ minHeight: "100vh" }}
           >
             <Typography variant="h3">Auto Message Reviewer is On...</Typography>
+            <LinearProgress color="error" />
+            <Typography variant="h6"></Typography>
           </Grid>
         )}
 
