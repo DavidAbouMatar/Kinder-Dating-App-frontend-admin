@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NavBar from "../Components/NavBar";
 import PendingMsgsTable from "../Components/PendingMsgsTable";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
 function PendingMessages(props) {
@@ -16,7 +17,6 @@ function PendingMessages(props) {
     let pending_count_data = response.data;
     setPending_imgs_count(pending_count_data["imgs_count"]);
     setPending_msgs_count(pending_count_data["msgs_count"]);
-    setIsPending(false);
   }
 
   function clickHandler(msg_id) {
@@ -43,7 +43,7 @@ function PendingMessages(props) {
         pending_imgs_count={pending_imgs_count}
         pending_msgs_count={pending_msgs_count}
       >
-        {isPending && <div>Loading...</div>}
+        {isPending && <CircularProgress style={{ color: "#F06795" }} />}
         {!isPending && (
           <PendingMsgsTable rows={rows} removeMsg={clickHandler} />
         )}

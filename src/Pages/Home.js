@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import NavBar from "../Components/NavBar";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
 function PendingImages(props) {
@@ -23,12 +24,13 @@ function PendingImages(props) {
 
   return (
     <div>
-      {isPending && <div>Loading...</div>}(
       <NavBar
         pageTitle="Admin Pannel"
         pending_imgs_count={pending_imgs_count}
         pending_msgs_count={pending_msgs_count}
-      ></NavBar>
+      >
+        {isPending && <CircularProgress style={{ color: "#F06795" }} />}
+      </NavBar>
       )
     </div>
   );

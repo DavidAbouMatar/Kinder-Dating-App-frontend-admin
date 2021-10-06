@@ -20,6 +20,7 @@ import ImageIcon from "@mui/icons-material/Image";
 import MessageIcon from "@mui/icons-material/Message";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Badge from "@mui/material/Badge";
+import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -191,10 +192,19 @@ export default function NavBar({
         </List>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Grid
+        component="main"
+        sx={{ flexGrow: 1, p: 3 }}
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <DrawerHeader />
         {children}
-      </Box>
+      </Grid>
     </Box>
   );
 }
