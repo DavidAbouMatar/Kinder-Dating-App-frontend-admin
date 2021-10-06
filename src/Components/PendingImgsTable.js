@@ -62,7 +62,7 @@ function PendingImgsTable({ rows, removeImg }) {
           <CardActions>
             <Button
               variant="contained"
-              style={{ backgroundColor: "#F06795", color: "#FFFFFF" }}
+              color="success"
               onClick={() => {
                 approveHandler(row.id);
               }}
@@ -70,7 +70,7 @@ function PendingImgsTable({ rows, removeImg }) {
               Approve
             </Button>
             <Button
-              variant="outlined"
+              variant="contained"
               color="error"
               onClick={() => {
                 rejectHandler(row.id);

@@ -59,7 +59,7 @@ function PendingMsgsTable({ rows, removeMsg }) {
               <TableCell align="right">
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "#F06795", color: "#FFFFFF" }}
+                  color="success"
                   onClick={() => {
                     approveHandler(row.id);
                   }}
@@ -69,7 +69,7 @@ function PendingMsgsTable({ rows, removeMsg }) {
               </TableCell>
               <TableCell align="right">
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   color="error"
                   onClick={() => {
                     rejectHandler(row.id);
