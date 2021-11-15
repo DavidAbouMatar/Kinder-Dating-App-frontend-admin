@@ -1,4 +1,4 @@
-# Kinder-dating-app-frontend
+# Kinder-dating-app-frontend-admin
 
 Kinder Dating App is a mobile application that provides the basic features of a dating app.
 
